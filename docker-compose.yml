@@ -1,0 +1,22 @@
+version: "3.9" ##Version of docker compose package at linux
+services: 
+  mongodb:
+    image: mongo:4.4.6
+    container_name: "mongo-database"
+    networks: ##here we can create an array of networks, this network will be created in this compose file
+      - compose-bridge-test 
+    
+  alurabooks:
+    image: aluradocker/alura-books:1.0
+    container_name: alura_books
+    networks:
+      -  compose-bridge-test
+    ports: ##Host | Guest
+      - 8080:3000
+  
+networks:
+  compose-bridge-test:
+    driver: bridge
+
+
+#Now just run $ docker compose up
